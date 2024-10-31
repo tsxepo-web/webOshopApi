@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace webOshop.Domain.Interfaces
+using webOshop.Domain.Entities;
+
+namespace webOshop.Domain.Interfaces;
+
+public interface IOrderRepository
 {
-    public interface IOrderRepository
-    {
-        
-    }
+    Task<Order> GetOrderByIdAsync(string id);
+    Task<List<Order>> GetOrdersByUserIdAsync(string userId);
+    Task AddOrderAsync(Order order);
+    Task UpdateOrderStatusAsync(string orderId, string status);
 }

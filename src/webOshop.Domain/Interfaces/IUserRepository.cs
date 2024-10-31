@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using webOshop.Domain.Entities;
 
-namespace webOshop.Domain.Interfaces
+namespace webOshop.Domain.Interfaces;
+public interface IUserRepository
 {
-    public interface IUserRepository
-    {
-        
-    }
+    Task<User> GetUserByIdAsync(string id);
+    Task<User> GetUserByUsernameAsync(string username);
+    Task AddUserAsync(User user);
+    Task UpdateUserAsync(User user);
 }

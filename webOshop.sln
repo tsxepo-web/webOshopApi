@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6FF1F3B1-077
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webOshop.Domain", "src\webOshop.Domain\webOshop.Domain.csproj", "{35F61AA2-C71A-4A73-AF59-36BCFF66038F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webOshop.Infrastructure", "src\webOshop.Infrastructure\webOshop.Infrastructure.csproj", "{1C148BAC-E904-4A0D-A75E-7F311A53A879}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webOshop.Api", "src\webOshop.Api\webOshop.Api.csproj", "{915D6931-3752-4AF6-ADC2-F7739F5014A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +24,18 @@ Global
 		{35F61AA2-C71A-4A73-AF59-36BCFF66038F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35F61AA2-C71A-4A73-AF59-36BCFF66038F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35F61AA2-C71A-4A73-AF59-36BCFF66038F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C148BAC-E904-4A0D-A75E-7F311A53A879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C148BAC-E904-4A0D-A75E-7F311A53A879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C148BAC-E904-4A0D-A75E-7F311A53A879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C148BAC-E904-4A0D-A75E-7F311A53A879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{915D6931-3752-4AF6-ADC2-F7739F5014A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{915D6931-3752-4AF6-ADC2-F7739F5014A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{915D6931-3752-4AF6-ADC2-F7739F5014A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{915D6931-3752-4AF6-ADC2-F7739F5014A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{35F61AA2-C71A-4A73-AF59-36BCFF66038F} = {6FF1F3B1-0771-44A3-AB92-39FBAE974510}
+		{1C148BAC-E904-4A0D-A75E-7F311A53A879} = {6FF1F3B1-0771-44A3-AB92-39FBAE974510}
+		{915D6931-3752-4AF6-ADC2-F7739F5014A0} = {6FF1F3B1-0771-44A3-AB92-39FBAE974510}
 	EndGlobalSection
 EndGlobal

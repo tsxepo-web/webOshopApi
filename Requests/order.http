@@ -1,0 +1,32 @@
+@baseUrl=http://localhost:5136/api
+@productId=6722bf4aeb48c2736ced6450
+@userId=6722cb3ba543f1b390ccc030
+@orderId=6722e1b9894f224d4b5d500a
+
+
+### Get Order by ID
+GET {{baseUrl}}/Order/{{orderId}}
+Accept: application/json
+
+
+### Get Orders by User ID
+GET {{baseUrl}}/Order/user/{{userId}}
+Accept: application/json
+
+### Create Order
+POST {{baseUrl}}/Order
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "productId": "{{productId}}",
+  "quantity": 2,
+  "status": "Pending"
+}
+
+### Update Order Status
+PATCH {{baseUrl}}/Order/{{orderId}}/status
+Content-Type: application/json
+
+"Shipped"
+

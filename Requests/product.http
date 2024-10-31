@@ -1,0 +1,37 @@
+@baseUrl=http://localhost:5136/api
+@productId=6722bf4aeb48c2736ced6450
+
+### Get All Products
+GET {{baseUrl}}/Product
+Accept: application/json
+
+### Get Product by ID
+GET {{baseUrl}}/Product/{{productId}}
+Accept:application/json
+
+### Add Product
+POST {{baseUrl}}/Product
+Content-Type: application/json
+
+{
+  "name": "LG Tv",
+  "description": "55 inch hdtv screen",
+  "price": 5555.99,
+  "instock": 18
+}
+
+### Update Product
+PUT {{baseUrl}}/Product/{{productId}}
+Content-Type: application/json
+
+{
+  "id": "{{productId}}",
+  "name": "Updated Product",
+  "description": "Updated description",
+  "price": 29.99,
+  "instock": 150
+}
+
+### Delete Product
+DELETE {{baseUrl}}/Product/{{productId}}
+Accept: application/json

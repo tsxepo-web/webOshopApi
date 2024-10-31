@@ -1,0 +1,32 @@
+@baseUrl=http://localhost:5136/api
+@userId=6722cb3ba543f1b390ccc030
+@userId1=6722d9c4484e4216baa59488
+
+
+### Get User by ID
+GET {{baseUrl}}/User/{{userId1}}
+Accept: application/json
+
+### Create User
+POST {{baseUrl}}/User
+Content-Type: application/json
+
+{
+  "username": "X",
+  "email": "x@example.com",
+  "passwordHash": "strongpasswordHash",
+  "address": "123 Main St, Mpumalanga"
+}
+
+### Update User
+PUT {{baseUrl}}/User/{{userId1}}
+Content-Type: application/json
+
+{
+  "id": "{{userId1}}",
+  "username": "X",
+  "email": "xo@example.com",
+  "passwordHash": "simplehashedpassword",
+  "address": "456 Elm St, Durban"
+}
+
