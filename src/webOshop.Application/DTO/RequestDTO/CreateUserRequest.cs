@@ -1,5 +1,5 @@
-namespace webOshop.Domain.DTO.UserDTO;
-public record UserRequest(
+namespace webOshop.Application.DTO.RequestDTO;
+public record CreateUserRequest(
     string Username,
     string Email,
     string PasswordHash,

@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using webOshop.Domain.DTO.OrderDTO;
-using webOshop.Domain.DTO.ProductDTO;
+using webOshop.Application.DTO.RequestDTO;
+using webOshop.Application.DTO.ResponseDTO;
 using webOshop.Domain.Entities;
 using webOshop.Domain.Interfaces;
 
@@ -36,7 +32,7 @@ namespace webOshop.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateOrder([FromBody] OrderRequest orderRequest)
+        public async Task<ActionResult> CreateOrder([FromBody] CreateOrderRequest orderRequest)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var order = new Order

@@ -1,8 +1,8 @@
-namespace webOshop.Domain.DTO.OrderDTO;
+namespace webOshop.Application.DTO.ResponseDTO;
 public record OrderResponse(
     string Id,
-    string UserId,
     string ProductId,
+    string UserId,
     int Quantity,
     DateTime OrderDate
 );

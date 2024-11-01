@@ -24,9 +24,9 @@ Content-Type: application/json
 
 {
   "id": "{{userId1}}",
-  "username": "X",
-  "email": "xo@example.com",
-  "passwordHash": "simplehashedpassword",
-  "address": "456 Elm St, Durban"
+  "username": "Y",
+  "email": "Y@example.com",
+  "passwordHash": "sedpassword",
+  "address": "456 Elm St, Mzansi"
 }
 

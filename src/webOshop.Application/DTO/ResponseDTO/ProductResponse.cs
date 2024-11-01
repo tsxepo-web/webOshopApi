@@ -1,4 +1,4 @@
-namespace webOshop.Domain.DTO.ProductDTO;
+namespace webOshop.Application.DTO.ResponseDTO;
 public record ProductResponse(
     string Id,
     string Name,

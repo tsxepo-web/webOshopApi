@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using webOshop.Domain.DTO;
-using webOshop.Domain.DTO.UserDTO;
+using webOshop.Application.DTO.RequestDTO;
+using webOshop.Application.DTO.ResponseDTO;
 using webOshop.Domain.Entities;
 using webOshop.Domain.Interfaces;
 
@@ -27,7 +27,7 @@ namespace webOshop.Api.Controllers
             }
             var response = new UserResponse(
                 Id: user.Id!,
-                UserName: user.Username!,
+                Username: user.Username!,
                 Email: user.Email!,
                 Address: user.Address!
             );
@@ -35,7 +35,7 @@ namespace webOshop.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateUser([FromBody] UserRequest userRequest)
+        public async Task<ActionResult> CreateUser([FromBody] CreateUserRequest userRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace webOshop.Api.Controllers
 
             var response = new UserResponse(
                 Id: user.Id!,
-                UserName: userRequest.Username,
+                Username: userRequest.Username,
                 Email: userRequest.Email,
                 Address: userRequest.Address
             );
@@ -60,7 +60,7 @@ namespace webOshop.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateUser(string id, [FromBody] UserRequest userRequest)
+        public async Task<ActionResult> UpdateUser(string id, [FromBody] UpdateUserRequest userRequest)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var existingUser = await _userRepository.GetUserByIdAsync(id);
@@ -75,7 +75,7 @@ namespace webOshop.Api.Controllers
 
             var response = new UserResponse(
                 Id: existingUser.Id!,
-                UserName: existingUser.Username,
+                Username: existingUser.Username,
                 Email: existingUser.Email,
                 Address: existingUser.Address
             );
