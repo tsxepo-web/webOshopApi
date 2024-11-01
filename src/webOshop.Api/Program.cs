@@ -11,6 +11,12 @@ builder.Services.AddMediatR(typeof(GetProductByIdHandler).Assembly);
 builder.Services.AddMediatR(typeof(GetAllProductsHandler).Assembly);
 builder.Services.AddMediatR(typeof(UpdateProductHandler).Assembly);
 
+builder.Services.AddMediatR(typeof(CreateOrderHandler).Assembly);
+builder.Services.AddMediatR(typeof(GetOrderByIdHandler).Assembly);
+builder.Services.AddMediatR(typeof(GetOrdersByUserIdHandler).Assembly);
+builder.Services.AddMediatR(typeof(UpdateOrderHandler).Assembly);
+builder.Services.AddMediatR(typeof(DeleteOrderHandler).Assembly);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,6 +1,9 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using webOshop.Application.Commands;
 using webOshop.Application.DTO.RequestDTO;
 using webOshop.Application.DTO.ResponseDTO;
+using webOshop.Application.Queries;
 using webOshop.Domain.Entities;
 using webOshop.Domain.Interfaces;
 
@@ -10,55 +13,51 @@ namespace webOshop.Api.Controllers
     [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderRepository _orderRepository;
+        private readonly IMediator _mediator;
 
-        public OrderController(IOrderRepository orderRepository)
+        public OrderController(IMediator mediator)
         {
-            _orderRepository = orderRepository;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrderById(string id)
         {
-            var order = await _orderRepository.GetOrderByIdAsync(id);
+            var order = await _mediator.Send(new GetOrderByIdQuery(id));
             return order == null ? NotFound() : Ok(order);
         }
 
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByUserId(string userId)
         {
-            var orders = await _orderRepository.GetOrdersByUserIdAsync(userId);
+            var orders = await _mediator.Send(new GetOrdersByUserIdQuery(userId));
+            if (orders == null || !orders.Any()) return NotFound("No order found for the specified user.");
             return Ok(orders);
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateOrder([FromBody] CreateOrderRequest orderRequest)
+        public async Task<ActionResult> CreateOrder([FromBody] CreateOrderRequest request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var order = new Order
-            {
-                UserId = orderRequest.UserId,
-                ProductId = orderRequest.ProductId,
-                Quantity = orderRequest.Quantity,
-                OrderDate = DateTime.UtcNow
-            };
-            await _orderRepository.AddOrderAsync(order);
+            if (request == null) return BadRequest("Order request can not be null,");
+            var result = await _mediator.Send(new CreateOrderCommand(request));
+            if (result == null) return BadRequest("Order creation failed");
 
-            var response = new OrderResponse(
-                Id: order.Id!,
-                UserId: order.UserId,
-                ProductId: order.ProductId,
-                Quantity: order.Quantity,
-                OrderDate: order.OrderDate
-            );
-            return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, response);
+            return CreatedAtAction(nameof(GetOrderById), new { id = result.Id }, result);
         }
 
-        [HttpPatch("{id}/status")]
-        public async Task<ActionResult> UpdateOrderStatus(string id, [FromBody] string status)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateOrderStatus(string id, [FromBody] CreateOrderRequest request)
         {
-            await _orderRepository.UpdateOrderStatusAsync(id, status);
-            return NoContent();
+            var command = new UpdateOrderCommand(id, request.Status);
+            var result = await _mediator.Send(command);
+            return result ? NoContent() : NotFound();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(string id)
+        {
+            var command = new DeleteOrderCommand(id);
+            var response = await _mediator.Send(command);
+            return response ? NoContent() : NotFound();
         }
     }
 }

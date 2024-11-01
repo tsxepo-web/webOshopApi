@@ -4,5 +4,6 @@ public record OrderResponse(
     string ProductId,
     string UserId,
     int Quantity,
-    DateTime OrderDate
+    DateTime OrderDate,
+    string Status
 );

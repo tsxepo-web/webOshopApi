@@ -1,4 +1,3 @@
-
 using MongoDB.Driver;
 using webOshop.Domain.Entities;
 using webOshop.Domain.Interfaces;
@@ -12,21 +11,34 @@ public class OrderRepository : IOrderRepository
         _orders = context.Orders;
     }
 
-    public async Task AddOrderAsync(Order order)
+    public async Task<Order> CreateOrderAsync(Order order)
     {
         await _orders.InsertOneAsync(order);
+        return order;
     }
 
-    public Task<Order> GetOrderByIdAsync(string id) => _orders.Find(o => o.Id == id).FirstOrDefaultAsync();
-
-    public Task<List<Order>> GetOrdersByUserIdAsync(string userId)
+    public async Task<bool> DeleteOrderAsync(string orderId)
     {
-        return _orders.Find(o => o.UserId == userId).ToListAsync();
+        var deleteResult = await _orders.DeleteOneAsync(o => o.Id == orderId);
+        return deleteResult.DeletedCount > 0;
     }
 
-    public async Task UpdateOrderStatusAsync(string orderId, string status)
+    public async Task<Order?> GetOrderByIdAsync(string OrderId)
     {
-        var update = Builders<Order>.Update.Set(o => o.Status, status);
-        await _orders.UpdateOneAsync(o => o.Id == orderId, update);
+        return await _orders.Find(o => o.Id == OrderId).FirstOrDefaultAsync();
+    }
+
+    public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
+    {
+        return await _orders.Find(o => o.UserId == userId).ToListAsync();
+    }
+
+    public async Task<bool> UpdateOrderStatusAsync(string orderId, string status)
+    {
+        var updatedResult = await _orders.UpdateOneAsync(
+            o => o.Id == orderId,
+            Builders<Order>.Update.Set(o => o.Status, status)
+        );
+        return updatedResult.ModifiedCount > 0;
     }
 }

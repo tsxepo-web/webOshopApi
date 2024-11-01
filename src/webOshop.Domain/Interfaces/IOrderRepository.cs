@@ -5,8 +5,9 @@ namespace webOshop.Domain.Interfaces;
 
 public interface IOrderRepository
 {
-    Task<Order> GetOrderByIdAsync(string id);
-    Task<List<Order>> GetOrdersByUserIdAsync(string userId);
-    Task AddOrderAsync(Order order);
-    Task UpdateOrderStatusAsync(string orderId, string status);
+    Task<Order?> GetOrderByIdAsync(string id);
+    Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId);
+    Task<Order> CreateOrderAsync(Order order);
+    Task<bool> UpdateOrderStatusAsync(string orderId, string status);
+    Task<bool> DeleteOrderAsync(string orderId);
 }
